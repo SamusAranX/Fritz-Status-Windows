@@ -118,20 +118,51 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Box Images\fritzbox7270.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="FritzStatus.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Icons\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Box Images\fritzbox3272.png" />
+    <Resource Include="Box Images\fritzbox3390.png" />
+    <Resource Include="Box Images\fritzbox3490.png" />
+    <Resource Include="Box Images\fritzbox4020.png" />
+    <Resource Include="Box Images\fritzbox4080.png" />
+    <Resource Include="Box Images\fritzbox5490.png" />
+    <Resource Include="Box Images\fritzbox6360.png" />
+    <Resource Include="Box Images\fritzbox6490.png" />
+    <Resource Include="Box Images\fritzbox6810.png" />
+    <Resource Include="Box Images\fritzbox6820.png" />
+    <Resource Include="Box Images\fritzbox6840.png" />
+    <Resource Include="Box Images\fritzbox6842.png" />
+    <Resource Include="Box Images\fritzbox7270.png" />
+    <Resource Include="Box Images\fritzbox7272.png" />
+    <Resource Include="Box Images\fritzbox7360.png" />
+    <Resource Include="Box Images\fritzbox7390.png" />
+    <Resource Include="Box Images\fritzbox7430.png" />
+    <Resource Include="Box Images\fritzbox7490.png" />
+    <Resource Include="Box Images\generic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\BlankIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\connected.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\notconnected.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\training.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\unknown.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

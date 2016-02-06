@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fritz_Status"
 		x:Class="Fritz_Status.MainWindow"
-        mc:Ignorable="d" Icon="FritzStatus.ico" Background="{DynamicResource BackgroundGradient}"
-        Title="Fritz!Status" ResizeMode="CanMinimize" UseLayoutRounding="True"
-		RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.ClearTypeHint="Enabled"
-		TextOptions.TextFormattingMode="Display" TextOptions.TextRenderingMode="Grayscale" Width="304" SizeToContent="Height">
+		SourceInitialized="Window_SourceInitialized"
+        mc:Ignorable="d" Background="{DynamicResource BackgroundGradient}"
+        Title="Fritz!Status" UseLayoutRounding="True"
+		RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.ClearTypeHint="Enabled" Icon="Icons/BlankIcon.ico"
+		TextOptions.TextFormattingMode="Display" TextOptions.TextRenderingMode="Grayscale" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize">
 	<Window.Resources>
 		<Style TargetType="{x:Type TextBlock}">
 			<Setter Property="Foreground" Value="#FFFFFF" />
@@ -42,7 +43,10 @@
 			<GradientStop Offset="1" Color="{StaticResource BGGradientColor2}" />
 		</LinearGradientBrush>
 	</Window.Resources>
-	<Grid Margin="8,12">
+	<Window.TaskbarItemInfo>
+		<TaskbarItemInfo ProgressState="Indeterminate" ProgressValue="1" />
+	</Window.TaskbarItemInfo>
+	<Grid Margin="14,12">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="100" />
 			<RowDefinition Height="24" />
@@ -60,7 +64,7 @@
 			</Grid>
 		</Button>
 		<TextBlock x:Name="fbBoxName" Text="Lädt…" FontSize="15" FontWeight="Bold" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
-		<TextBlock x:Name="fbConnInfo" Text="DSL aktiv seit: 13 Stunden und 37 Minuten" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		<TextBlock x:Name="fbConnInfo" Text="DSL aktiv seit: 16 Tagen, 18 Stunden, 13 Minuten" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
 		<TextBlock x:Name="fbConnSpeed" Text="DL: 3500 kbit/s - UL: 500 kbit/s" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
 	</Grid>
