@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -22,12 +23,18 @@ namespace Fritz_Status {
 
 		public MainWindow() {
 			InitializeComponent();
+
+			fbBoxName.Text = "\u26AB\uFE0E";
 		}
 
 		private bool isUpdating = false;
 		private async void button_Click(object sender, RoutedEventArgs e) {
-			if(!isUpdating) {
+			if(!isUpdating) { 
 				isUpdating = true;
+
+				var fbLoadingIn = (Storyboard)TryFindResource("fbLoadingIn");
+				fbLoadingIn.Begin();
+
 				var overview = await FritzStatus.GetStatus();
 				var boxInfo = await FritzStatus.GetBoxNameAndOS();
 
@@ -39,9 +46,13 @@ namespace Fritz_Status {
 				
 				Debug.WriteLine(boxInfo.BoxName);
 				Debug.WriteLine(boxInfo.BoxOS);
+
+				var fbLoadingOut = (Storyboard)TryFindResource("fbLoadingOut");
+				fbLoadingIn.Stop();
+				fbLoadingOut.Begin();
+
 				isUpdating = false;
 			} else {
-				Debug.WriteLine("");
 			}			
 		}
 	}

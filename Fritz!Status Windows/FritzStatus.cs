@@ -56,7 +56,7 @@ namespace Fritz_Status {
 
 		public static async Task<DslOverview> GetStatus() {
 			HttpWebRequest request = WebRequest.CreateHttp(FRITZ_OVERVIEW);
-			request.Timeout = 10000;
+			request.Timeout = 5000;
 
 			try {
 				HttpWebResponse response = (HttpWebResponse)(await request.GetResponseAsync());

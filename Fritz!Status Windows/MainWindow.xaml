@@ -1,32 +1,70 @@
-﻿<Window x:Class="Fritz_Status.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fritz_Status"
-        mc:Ignorable="d"
-        Title="Fritz!Status" Height="210" Width="300" ResizeMode="CanMinimize"
-		RenderOptions.BitmapScalingMode="HighQuality" Icon="FritzStatus.ico">
+        xmlns:ee="http://schemas.microsoft.com/expression/2010/effects"
+		x:Class="Fritz_Status.MainWindow"
+        mc:Ignorable="d" Icon="FritzStatus.ico" Background="{DynamicResource BackgroundGradient}"
+        Title="Fritz!Status" ResizeMode="CanMinimize" UseLayoutRounding="True"
+		RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.ClearTypeHint="Enabled"
+		TextOptions.TextFormattingMode="Display" TextOptions.TextRenderingMode="Grayscale" Width="304" SizeToContent="Height">
 	<Window.Resources>
-		<ResourceDictionary>
-			
-		</ResourceDictionary>
+		<Style TargetType="{x:Type TextBlock}">
+			<Setter Property="Foreground" Value="#FFFFFF" />
+			<Setter Property="FontFamily" Value="Segoe UI" />
+			<Setter Property="FontSize" Value="13" />
+			<Setter	Property="FontWeight" Value="Medium" />
+			<Setter Property="TextTrimming" Value="WordEllipsis" />
+			<Setter Property="Padding" Value="0,2" />
+			<Setter Property="Effect" Value="{DynamicResource fbTextShadow}" />
+		</Style>
+
+		<CubicEase x:Key="fbEasingFunc" EasingMode="EaseInOut" />
+
+		<DropShadowEffect x:Key="fbTextShadow" BlurRadius="1" Direction="270" Opacity="0.75" RenderingBias="Quality" ShadowDepth="1" />
+
+		<ee:SharpenEffect x:Key="fbImageSharpen" Amount="2.4" />
+
+		<Storyboard x:Key="fbLoadingIn">
+			<DoubleAnimation Storyboard.TargetName="fbLoadingBlur" Storyboard.TargetProperty="Radius" Duration="0:0:0.33" To="0" EasingFunction="{DynamicResource fbEasingFunc}" />
+			<DoubleAnimation Storyboard.TargetName="fbLoading" Storyboard.TargetProperty="Opacity" Duration="0:0:0.33" To="1" EasingFunction="{DynamicResource fbEasingFunc}" />
+		</Storyboard>
+
+		<Storyboard x:Key="fbLoadingOut">
+			<DoubleAnimation Storyboard.TargetName="fbLoadingBlur" Storyboard.TargetProperty="Radius" Duration="0:0:0.33" To="32" EasingFunction="{DynamicResource fbEasingFunc}"/>
+			<DoubleAnimation Storyboard.TargetName="fbLoading" Storyboard.TargetProperty="Opacity" Duration="0:0:0.33" To="0" EasingFunction="{DynamicResource fbEasingFunc}" />
+		</Storyboard>
+
+		<Color x:Key="BGGradientColor1" A="255" R="57" G="67" B="78" />
+		<Color x:Key="BGGradientColor2" A="255" R="124" G="131" B="138" />
+
+		<LinearGradientBrush x:Key="BackgroundGradient" StartPoint="0,0" EndPoint="0,1">
+			<GradientStop Offset="0" Color="{StaticResource BGGradientColor1}" />
+			<GradientStop Offset="1" Color="{StaticResource BGGradientColor2}" />
+		</LinearGradientBrush>
 	</Window.Resources>
-	<Grid>
+	<Grid Margin="8,12">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="100" />
 			<RowDefinition Height="24" />
 			<RowDefinition Height="24" />
 			<RowDefinition Height="24" />
-			<RowDefinition />
 		</Grid.RowDefinitions>
-		<Button x:Name="fbButton" Grid.Row="0" Width="150"  Click="button_Click" HorizontalAlignment="Center" 
-		Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}">
+		<Button x:Name="fbButton" Grid.Row="0" Width="150"  Click="button_Click" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}">
 			<Grid>
-				<Image x:Name="fbImage" Source="Box Images/fritzbox7270.png" />
-				<!--<ProgressBar x:Name="fbProgressBar" Width="140" Height="12" HorizontalAlignment="Center" VerticalAlignment="Center" IsIndeterminate="True" />-->
+				<Image x:Name="fbImage" Source="Box Images/fritzbox7270.png" Effect="{DynamicResource fbImageSharpen}" />
+				<ProgressBar x:Name="fbLoading" Width="140" Height="12" HorizontalAlignment="Center" VerticalAlignment="Center" IsIndeterminate="True" Opacity="0">
+					<ProgressBar.Effect>
+						<BlurEffect x:Name="fbLoadingBlur" Radius="0" RenderingBias="Quality" KernelType="Gaussian" />
+					</ProgressBar.Effect>
+				</ProgressBar>
 			</Grid>
 		</Button>
+		<TextBlock x:Name="fbBoxName" Text="Lädt…" FontSize="15" FontWeight="Bold" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		<TextBlock x:Name="fbConnInfo" Text="DSL aktiv seit: 13 Stunden und 37 Minuten" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		<TextBlock x:Name="fbConnSpeed" Text="DL: 3500 kbit/s - UL: 500 kbit/s" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
 	</Grid>
 </Window>
