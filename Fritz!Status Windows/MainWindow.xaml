@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fritz_Status"
-        xmlns:ee="http://schemas.microsoft.com/expression/2010/effects"
 		x:Class="Fritz_Status.MainWindow"
         mc:Ignorable="d" Icon="FritzStatus.ico" Background="{DynamicResource BackgroundGradient}"
         Title="Fritz!Status" ResizeMode="CanMinimize" UseLayoutRounding="True"
@@ -24,8 +23,6 @@
 		<CubicEase x:Key="fbEasingFunc" EasingMode="EaseInOut" />
 
 		<DropShadowEffect x:Key="fbTextShadow" BlurRadius="1" Direction="270" Opacity="0.75" RenderingBias="Quality" ShadowDepth="1" />
-
-		<ee:SharpenEffect x:Key="fbImageSharpen" Amount="2.4" />
 
 		<Storyboard x:Key="fbLoadingIn">
 			<DoubleAnimation Storyboard.TargetName="fbLoadingBlur" Storyboard.TargetProperty="Radius" Duration="0:0:0.33" To="0" EasingFunction="{DynamicResource fbEasingFunc}" />
