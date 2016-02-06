@@ -1,0 +1,26 @@
+﻿<Window x:Class="Fritz_Status.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Fritz_Status"
+        mc:Ignorable="d"
+        Title="Fritz!Status" Height="210" Width="300" ResizeMode="CanMinimize"
+		RenderOptions.BitmapScalingMode="HighQuality" Icon="FritzStatus.ico">
+	<Window.Resources>
+		<ResourceDictionary>
+			
+		</ResourceDictionary>
+	</Window.Resources>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="100" />
+			<RowDefinition />
+		</Grid.RowDefinitions>
+		<Button x:Name="fbButton" Grid.Row="0" Width="150"  Click="button_Click" HorizontalAlignment="Center" 
+		Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}">
+			<Image x:Name="fbImage" Source="Box Images/fritzbox7270.png" />
+		</Button>
+
+	</Grid>
+</Window>
