@@ -154,18 +154,6 @@
   <ItemGroup>
     <Resource Include="Icons\BlankIcon.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Icons\connected.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Icons\notconnected.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Icons\training.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Icons\unknown.ico" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
