@@ -26,12 +26,11 @@ namespace Fritz_Status {
 
 		private DispatcherTimer refreshTimer;
 		
-		// Colors need fixing. I don't know what FromScRgb is for, but it sure as heck doesn't work with RGB floats.
 		private Dictionary<FritzConnectionStatus, Color> StatusColors = new Dictionary<FritzConnectionStatus, Color> {
-			{FritzConnectionStatus.NotConnected, Color.FromScRgb(1f, 1f, 0.23f, 0.19f) },
-			{FritzConnectionStatus.Training, Color.FromScRgb(1f, 1f, 0.58f, 0f) },
-			{FritzConnectionStatus.Connected, Color.FromScRgb(1f, 0.3f, 0.85f, 0.39f) },
-			{FritzConnectionStatus.Unknown, Color.FromScRgb(1f, 0.73f, 0.73f, 0.73f) }
+			{FritzConnectionStatus.NotConnected, Color.FromRgb(255, 58, 48) },
+			{FritzConnectionStatus.Training, Color.FromRgb(255, 149, 0) },
+			{FritzConnectionStatus.Connected, Color.FromRgb(76, 217, 100) },
+			{FritzConnectionStatus.Unknown, Color.FromRgb(185, 185, 187) }
 		};
 
 		// ProgressBar animations
