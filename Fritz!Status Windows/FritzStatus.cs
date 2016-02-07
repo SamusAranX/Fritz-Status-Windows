@@ -67,6 +67,8 @@ namespace Fritz_Status {
 		const string FRITZ_FBOS = "http://fritz.box/home/pp_fbos.lua";
 		const string FRITZ_OVERVIEW = "http://fritz.box/internet/dsl_overview.lua?useajax=1&action=get_data";
 
+		public const string INVALID_SID = "0000000000000000";
+
 		const string SID_REGEX = "<SID>(.*)</SID>";
 		const string CHALLENGE_REGEX = "<Challenge>(.*)</Challenge>";
 

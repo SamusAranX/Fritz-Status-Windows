@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
@@ -23,6 +24,10 @@ namespace Fritz_Status {
 
 		private bool isFirstUpdate = true;
 		private FritzStatus fritzStatus;
+
+		private const int BOX_INFO_REFRESH_THRESHOLD = 20;
+		private int boxInfoRefreshCounter = 19;
+		private BoxInfo oldBoxInfo = new BoxInfo { IsNull = true };
 
 		private DispatcherTimer refreshTimer;
 		
@@ -80,23 +85,31 @@ namespace Fritz_Status {
 		}
 
 		private async void button_Click(object sender, RoutedEventArgs e) {
-			await refreshInfo(true);		
+			var shiftPressed = Keyboard.Modifiers.HasFlag(ModifierKeys.Shift);
+			await refreshInfo(true, shiftPressed);		
 		}
 
-		private async Task refreshInfo(bool manual = false) {
+		private async Task refreshInfo(bool manual = false, bool shift = false) {
 			var manualModStr = manual ? "manual " : ""; // Add "manual" to "Attempting refresh!" when manually refreshing
-			Debug.WriteLine($"Attempting {manualModStr}refresh!"); // Interpolated strings are fucking awesome, by the way
+			var shiftModStr = shift ? " (holding Shift key)" : "";
+			Debug.WriteLine($"Attempting {manualModStr}refresh!{shiftModStr}"); // Interpolated strings are fucking awesome, by the way
 
 			if (!isUpdating) {
 				isUpdating = true;
+
+				boxInfoRefreshCounter++;
+				var boxInfoThresholdReached = boxInfoRefreshCounter == BOX_INFO_REFRESH_THRESHOLD;
+				if (boxInfoThresholdReached)
+					boxInfoRefreshCounter = 0;
 				
 				DslOverview status = null;
-				BoxInfo boxInfo = new BoxInfo { IsNull = true };
-
 
 				if (isFirstUpdate) {
 					var sid = await fritzStatus.GetSessionID();
-					if (sid == null) {
+					if (sid == FritzStatus.INVALID_SID) {
+						MessageBox.Show("Fritz!Status currently does not support password protection. To use Fritz!Status, you must remove the password protection of your FRITZ!Box. Sorry about that.", "FRITZ!Box is password protected", MessageBoxButton.OK, MessageBoxImage.Error);
+						Application.Current.Shutdown();
+					} else if (sid == null) {
 						MessageBox.Show("The request either timed out or simply failed.\nTry restarting the app first, and if that doesn't work, see if the box is faulty.", "Couldn't get session ID", MessageBoxButton.OK, MessageBoxImage.Error);
 						Application.Current.Shutdown();
 					}
@@ -106,10 +119,12 @@ namespace Fritz_Status {
 					isFirstUpdate = false;
 				}
 
-				boxInfo = await fritzStatus.GetBoxInfo();
+				if(oldBoxInfo.IsNull || boxInfoThresholdReached) {
+					oldBoxInfo = await fritzStatus.GetBoxInfo();
+				}
 				status = await fritzStatus.GetStatus();
 
-				if (!boxInfo.IsNull && status != null) {
+				if (!oldBoxInfo.IsNull && status != null) {
 					Debug.WriteLine("We're done refreshing!");
 
 					switch (status.line[0].GetConnectionStatus()) {
@@ -129,7 +144,7 @@ namespace Fritz_Status {
 
 					// Set the image
 					try {
-						fbImage.Source = new BitmapImage(new Uri($"pack://application:,,,/{Assembly.GetExecutingAssembly().GetName().Name};component/Box Images/fritzbox{boxInfo.BoxNumber}.png", UriKind.Absolute));
+						fbImage.Source = new BitmapImage(new Uri($"pack://application:,,,/{Assembly.GetExecutingAssembly().GetName().Name};component/Box Images/fritzbox{oldBoxInfo.BoxNumber}.png", UriKind.Absolute));
 					} catch {
 						fbImage.Source = new BitmapImage(new Uri($"pack://application:,,,/{Assembly.GetExecutingAssembly().GetName().Name};component/Box Images/generic.png", UriKind.Absolute));
 					}
@@ -139,7 +154,7 @@ namespace Fritz_Status {
 					r.Foreground = new SolidColorBrush(StatusColors[status.line[0].GetConnectionStatus()]);
 					fbBoxName.Inlines.Clear();
 					fbBoxName.Inlines.Add(r);
-					fbBoxName.Inlines.Add(boxInfo.BoxName);
+					fbBoxName.Inlines.Add(oldBoxInfo.BoxName);
 
 					// Set the connection info field
 					var trainStateString = status.line[0].train_state;
@@ -151,6 +166,10 @@ namespace Fritz_Status {
 					// Set the connection speed field
 					var speedString = $"{FB_TRI_DOWN} {status.ds_rate} – {status.us_rate} {FB_TRI_UP}";
 					fbConnSpeed.Text = speedString;
+				} else {
+					Debug.WriteLine("Something went wrong while updating");
+					Debug.WriteLine(oldBoxInfo.IsNull);
+					Debug.WriteLine(status == null);
 				}
 
 				isUpdating = false;
