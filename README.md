@@ -2,9 +2,10 @@
 A simple app to monitor the connection status of your FRITZ!Box.
 
 ## Features
-* shows essential connection data of your FRITZ!Box
-* reloads said data every few secs
-* looks good while doing it
+* Shows essential connection data of your FRITZ!Box
+* Reloads said data every few secs
+* Looks good while doing it
+* Will color its taskbar icon according to the connection’s status, so you can keep it minimized
 
 ## Requirements
 * Windows 7 or later
