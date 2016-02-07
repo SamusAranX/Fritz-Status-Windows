@@ -14,8 +14,6 @@ A simple app to monitor the connection status of your FRITZ!Box.
 ## Screenshots
 
 ![Loading data](https://cloud.githubusercontent.com/assets/676069/12872788/9fff883a-cdac-11e5-8780-d3a5632bbf78.png)
-![Displaying information](https://cloud.githubusercontent.com/assets/676069/12872789/a2c7cc30-cdac-11e5-9352-3f977c85ca4a.png)
-
 ![Close-up of the colored taskbar icon](https://cloud.githubusercontent.com/assets/676069/12872790/a49c54ae-cdac-11e5-8a9f-4e4f3df48fe9.PNG)
 
 ## Known issues
