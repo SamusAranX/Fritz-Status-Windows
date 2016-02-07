@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fritz_Status"
 		x:Class="Fritz_Status.MainWindow"
-		SourceInitialized="Window_SourceInitialized"
+		Loaded="Window_Loaded"
         mc:Ignorable="d" Background="{DynamicResource BackgroundGradient}"
-        Title="Fritz!Status" UseLayoutRounding="True"
+        Title="Fritz!Status" UseLayoutRounding="True" MinWidth="250"
 		RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.ClearTypeHint="Enabled" Icon="Icons/BlankIcon.ico"
 		TextOptions.TextFormattingMode="Display" TextOptions.TextRenderingMode="Grayscale" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize">
 	<Window.Resources>
@@ -53,9 +53,9 @@
 			<RowDefinition Height="24" />
 			<RowDefinition Height="24" />
 		</Grid.RowDefinitions>
-		<Button x:Name="fbButton" Grid.Row="0" Width="150"  Click="button_Click" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}">
+		<Button x:Name="fbButton" Grid.Row="0" Width="150" ToolTip="Reload data" Click="button_Click" HorizontalAlignment="Center" Background="{x:Null}" BorderBrush="{x:Null}">
 			<Grid>
-				<Image x:Name="fbImage" Source="Box Images/fritzbox7270.png" Effect="{DynamicResource fbImageSharpen}" />
+				<Image x:Name="fbImage" Source="Box Images/generic.png" />
 				<ProgressBar x:Name="fbLoading" Width="140" Height="12" HorizontalAlignment="Center" VerticalAlignment="Center" IsIndeterminate="True" Opacity="0">
 					<ProgressBar.Effect>
 						<BlurEffect x:Name="fbLoadingBlur" Radius="0" RenderingBias="Quality" KernelType="Gaussian" />
@@ -63,9 +63,9 @@
 				</ProgressBar>
 			</Grid>
 		</Button>
-		<TextBlock x:Name="fbBoxName" Text="Lädt…" FontSize="15" FontWeight="Bold" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
-		<TextBlock x:Name="fbConnInfo" Text="DSL aktiv seit: 16 Tagen, 18 Stunden, 13 Minuten" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
-		<TextBlock x:Name="fbConnSpeed" Text="DL: 3500 kbit/s - UL: 500 kbit/s" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		<TextBlock x:Name="fbBoxName" Text="Loading…" FontSize="15" FontWeight="Bold" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		<TextBlock x:Name="fbConnInfo" Text="…" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		<TextBlock x:Name="fbConnSpeed" Text="…" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
 	</Grid>
 </Window>
