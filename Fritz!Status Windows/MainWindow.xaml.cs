@@ -22,7 +22,6 @@ namespace Fritz_Status {
 
 		private bool isFirstUpdate = true;
 		private FritzStatus fritzStatus;
-		private BoxInfo boxInfo = new BoxInfo { IsNull = true }; // We'll reuse this in all updates after the first
 
 		private DispatcherTimer refreshTimer;
 		
@@ -92,6 +91,8 @@ namespace Fritz_Status {
 				isUpdating = true;
 				
 				DslOverview status = null;
+				BoxInfo boxInfo = new BoxInfo { IsNull = true };
+
 
 				if (isFirstUpdate) {
 					var sid = await fritzStatus.GetSessionID();
@@ -102,9 +103,9 @@ namespace Fritz_Status {
 
 					fritzStatus.SessionID = sid;
 
-					boxInfo = await fritzStatus.GetBoxInfo();
 				}
 
+				boxInfo = await fritzStatus.GetBoxInfo();
 				status = await fritzStatus.GetStatus();
 
 				if(!boxInfo.IsNull && status != null) {

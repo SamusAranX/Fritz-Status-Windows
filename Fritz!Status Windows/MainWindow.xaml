@@ -64,8 +64,8 @@
 			</Grid>
 		</Button>
 		<TextBlock x:Name="fbBoxName" Text="Loading…" FontSize="15" FontWeight="Bold" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
-		<TextBlock x:Name="fbConnInfo" Text="…" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
-		<TextBlock x:Name="fbConnSpeed" Text="…" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		<TextBlock x:Name="fbConnInfo" Text="…" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.7" />
+		<TextBlock x:Name="fbConnSpeed" Text="…" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0.7" />
 
 	</Grid>
 </Window>

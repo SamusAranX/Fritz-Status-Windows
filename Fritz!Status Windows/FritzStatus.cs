@@ -112,7 +112,7 @@ namespace Fritz_Status {
 			Debug.WriteLine(uriBuilder.ToString());
 
 			HttpWebRequest request = WebRequest.CreateHttp(uriBuilder.ToString());
-			request.Timeout = 10000;
+			request.Timeout = 7500;
 
 			try {
 				HttpWebResponse response = (HttpWebResponse)(await request.GetResponseAsync());
@@ -138,7 +138,7 @@ namespace Fritz_Status {
 
 		public async Task<DslOverview> GetStatus() {
 			HttpWebRequest request = WebRequest.CreateHttp(FRITZ_OVERVIEW);
-			request.Timeout = 5000;
+			request.Timeout = 7500;
 
 			try {
 				HttpWebResponse response = (HttpWebResponse)(await request.GetResponseAsync());
