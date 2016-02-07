@@ -18,7 +18,8 @@ namespace Fritz_Status {
 	public partial class MainWindow : Window {
 
 		private const string FB_BULLET = "\u26AB\uFE0E";
-		private const string FB_CONN_SPEED = "▼ {0} - {1} ▲";
+		private const string FB_TRI_DOWN = "▼";
+		private const string FB_TRI_UP = "▲";
 
 		private bool isFirstUpdate = true;
 		private FritzStatus fritzStatus;
@@ -108,7 +109,7 @@ namespace Fritz_Status {
 				boxInfo = await fritzStatus.GetBoxInfo();
 				status = await fritzStatus.GetStatus();
 
-				if(!boxInfo.IsNull && status != null) {
+				if (!boxInfo.IsNull && status != null) {
 					Debug.WriteLine("We're done refreshing!");
 
 					switch (status.line[0].GetConnectionStatus()) {
@@ -127,7 +128,7 @@ namespace Fritz_Status {
 					}
 
 					// Set the image and set isFirstUpdate to false
-					if(isFirstUpdate) {
+					if (isFirstUpdate) {
 						try {
 							fbImage.Source = new BitmapImage(new Uri($"pack://application:,,,/{Assembly.GetExecutingAssembly().GetName().Name};component/Box Images/fritzbox{boxInfo.BoxNumber}.png", UriKind.Absolute));
 						} catch {
@@ -143,16 +144,16 @@ namespace Fritz_Status {
 					fbBoxName.Inlines.Clear();
 					fbBoxName.Inlines.Add(r);
 					fbBoxName.Inlines.Add(boxInfo.BoxName);
-					
+
 					// Set the connection info field
 					var trainStateString = status.line[0].train_state;
-					if(status.line[0].GetConnectionStatus() == FritzConnectionStatus.Connected) {
+					if (status.line[0].GetConnectionStatus() == FritzConnectionStatus.Connected) {
 						trainStateString += $" {status.line[0].time}";
 					}
 					fbConnInfo.Text = trainStateString;
 
 					// Set the connection speed field
-					var speedString = $"DL: {status.ds_rate} – UL: {status.us_rate}";
+					var speedString = $"{FB_TRI_DOWN} {status.ds_rate} – {status.us_rate} {FB_TRI_UP}";
 					fbConnSpeed.Text = speedString;
 				}
 
