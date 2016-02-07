@@ -103,6 +103,7 @@ namespace Fritz_Status {
 
 					fritzStatus.SessionID = sid;
 
+					isFirstUpdate = false;
 				}
 
 				boxInfo = await fritzStatus.GetBoxInfo();
@@ -126,15 +127,11 @@ namespace Fritz_Status {
 							break;
 					}
 
-					// Set the image and set isFirstUpdate to false
-					if (isFirstUpdate) {
-						try {
-							fbImage.Source = new BitmapImage(new Uri($"pack://application:,,,/{Assembly.GetExecutingAssembly().GetName().Name};component/Box Images/fritzbox{boxInfo.BoxNumber}.png", UriKind.Absolute));
-						} catch {
-							fbImage.Source = new BitmapImage(new Uri($"pack://application:,,,/{Assembly.GetExecutingAssembly().GetName().Name};component/Box Images/generic.png", UriKind.Absolute));
-						}
-
-						isFirstUpdate = false;
+					// Set the image
+					try {
+						fbImage.Source = new BitmapImage(new Uri($"pack://application:,,,/{Assembly.GetExecutingAssembly().GetName().Name};component/Box Images/fritzbox{boxInfo.BoxNumber}.png", UriKind.Absolute));
+					} catch {
+						fbImage.Source = new BitmapImage(new Uri($"pack://application:,,,/{Assembly.GetExecutingAssembly().GetName().Name};component/Box Images/generic.png", UriKind.Absolute));
 					}
 
 					// Set the box name field

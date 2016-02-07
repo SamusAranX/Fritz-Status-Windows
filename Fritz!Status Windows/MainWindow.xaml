@@ -23,7 +23,7 @@
 
 		<CubicEase x:Key="fbEasingFunc" EasingMode="EaseInOut" />
 
-		<DropShadowEffect x:Key="fbTextShadow" BlurRadius="1" Direction="270" Opacity="0.75" RenderingBias="Quality" ShadowDepth="1" />
+		<DropShadowEffect x:Key="fbTextShadow" BlurRadius="4" Direction="270" Opacity="0.75" RenderingBias="Quality" ShadowDepth="1" />
 
 		<Storyboard x:Key="fbLoadingIn">
 			<DoubleAnimation Storyboard.TargetName="fbLoadingBlur" Storyboard.TargetProperty="Radius" Duration="0:0:0.33" To="0" EasingFunction="{DynamicResource fbEasingFunc}" />
