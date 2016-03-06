@@ -42,10 +42,15 @@ namespace Fritz_Status {
 					return FritzConnectionStatus.Unknown;
 				}
 			} else if (!state.IsNullOrWhiteSpace()) {
-				if(state == "ready") {
-					return FritzConnectionStatus.Connected;
-				} else {
-					return FritzConnectionStatus.Unknown;
+				switch (state) {
+					case "error":
+						return FritzConnectionStatus.NotConnected;
+					case "training":
+						return FritzConnectionStatus.Training;
+					case "ready":
+						return FritzConnectionStatus.Connected;
+					default:
+						return FritzConnectionStatus.Unknown;
 				}
 			} else {
 				return FritzConnectionStatus.Unknown;
